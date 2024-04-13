@@ -1,0 +1,7 @@
+.card-custom {
+	background: #DAE2F8 !important;
+	background: -webkit-linear-gradient(to right, #D6A4A4, #DAE2F8) !important;
+	background: linear-gradient(to right, #D6A4A4, #DAE2F8) !important;
+	border: none !important;
+	box-shadow: none !important;
+}
