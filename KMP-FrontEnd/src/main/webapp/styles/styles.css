@@ -1,7 +1,137 @@
-.card-custom {
-	background: #DAE2F8 !important;
-	background: -webkit-linear-gradient(to right, #D6A4A4, #DAE2F8) !important;
-	background: linear-gradient(to right, #D6A4A4, #DAE2F8) !important;
-	border: none !important;
-	box-shadow: none !important;
+.container{
+	padding-left: 130px;
+	width: 90%;
+	margin-top: 25px;
+	height: 100%;
+}
+
+.container2{
+	display: flex;
+}
+
+
+*,*:before,*:after{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+} 
+
+
+.fa.fa-home.fa-2x{
+	background-color: transparent;
+	border: none;
+	color: white;
+}
+
+.backbutton{
+	display: flex;
+	justify-content: flex-start;
+}
+
+
+body{
+	background-color: #000814;
+	font-family: 'Consolas',sans-serif;
+	color: white;
+}
+
+.background{
+	width: 430px;
+	height: 520px;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	left: 50%;
+	top: 50%;
+}
+
+.forml{
+	margin-top: 5px;
+	height: 480px;
+	width: 1100px;
+	background-color: rgba(255, 255, 255, 0.13);
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+	padding: 50px 35px;
+	font-family: 'Consolas', sans-serif;
+	color: white;
+	letter-spacing: 0.5px;
+	outline: none;
+	border: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+.inputg, ui-scrollpanel{
+	width: 50%;
+}
+
+.h3log{
+	font-size: 32px;
+	font-weight: 500;
+	line-height: 42px;
+	text-align: center;
+}
+
+.label{
+	display: block;
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 500;
+	margin-right: 40px;
+	float: left;
+}
+
+.input{
+	display: block;
+	height: 50px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.07);
+	font-family: 'Consolas', sans-serif;
+	color: white;
+	border-radius: 3px;
+	padding: 0 10px;
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+
+.containerfile{
+	margin-top: 60px;
+}
+
+.search{
+	margin-left: 10px;
+}
+
+.background .shape{
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	border-radius: 50%;
+	
+}
+
+.shape:first-child{
+	background: linear-gradient(
+		#1845ad,
+		#23a2f6
+	);
+	left: -420px;
+	top: -40px;
+}
+
+.shape:last-child{
+	background: linear-gradient(
+		#ff512f,
+		#f09819
+	);
+	right: -420px;
+	bottom: -40px;
 }

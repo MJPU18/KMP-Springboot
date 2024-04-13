@@ -11,40 +11,83 @@
 	<title>KMP String Matching</title>
 </h:head>
 <h:body>
+
+	<p:growl id="messages" showDetail="true" />
 	<div class="card">
-		<p:growl id="messages" showDetail="true" />
-		<div class="card">
-			<h:form>
-				<p:fileUpload value="#{FileBean.file}" mode="simple"
-					skinSimple="true" auto="true" process="@this"
-					update="messages formtxt" listener="#{FileBean.handleFileUpload}" />
+
+
+		<div class="background">
+			<div class="shape" id="shapes"></div>
+			<div class="shape"></div>
+		</div>
+		
+		<h:form class="forml" id="formtxt">
+
+			<div class="inputg">
+
+				<h3 class="h3log">Words Tracker</h3>
+
+				<div class="containerfile">
+
+					<p:outputLabel  class="label" value="Choose File"></p:outputLabel>
+
+					<p:fileUpload  value="#{FileBean.file}" mode="simple"
+						allowTypes="/(\.|\/)(txt)$/" skinSimple="true" auto="true"
+						process="@this" update="messages formtxt"
+						listener="#{FileBean.handleFileUpload}" />
+
+				</div>
+
 
 				<div class="grid ui-fluid">
-					<div class="col-12 md:col-4">
+
+					<div class="col-12 md:col-4 containerfile">
 						<div class="ui-inputgroup">
-							<p:commandButton value="Search" action="#{FileBean.markWord}"
-								update="messages formtxt quantity" />
-							<p:inputText placeholder="Word" value="#{FileBean.pat}" />
+							<p:commandButton value="Search" class="search"
+								action="#{FileBean.markWord}" update="messages formtxt quantity" />
+
+							<p:inputText style="background-color: rgba(255, 255, 255, 0.07);color: white;font-family: 'Consolas', sans-serif;" 
+							placeholder="Word" value="#{FileBean.pat}" />
 						</div>
 					</div>
-					<div class="col-12 md:col-4">
+
+					<div class="containerfile">
+						<p:outputLabel class="label" value="Repetitions Quantity"></p:outputLabel>
+					</div>
+
+
+					<div class="col-12 md:col-4 containerfile">
 						<div class="ui-inputgroup">
 							<p:inputText id="quantity" placeholder="Quantity" readonly="true"
-								value="#{FileBean.repetitions}" />
+								value="#{FileBean.repetitions}" style="background-color: rgba(255, 255, 255, 0.07);
+								color: white;font-family: 'Consolas', sans-serif;"/>
 						</div>
 					</div>
 				</div>
-			</h:form>
-		</div>
-		<h:form id="formtxt">
-			<c:if test="#{not empty FileBean.data}">
-				<p:scrollPanel mode="native" style="width:700px;height:600px">
-					<p:panel header="#{FileBean.data.title}">
-						<p:outputLabel value="#{FileBean.data.body}" escape="false" />
-					</p:panel>
-				</p:scrollPanel>
-			</c:if>
+			</div>
+
+			<div class="" style="width: 50%">
+				<h3 class="h3log" style="margin-left: 50px;">File Content</h3>
+
+				<c:if test="#{not empty FileBean.data}">
+
+					<p:scrollPanel mode="native"
+						style="margin-top: 25px;margin-left:50px;width:490px;
+						height:340px;background-color: transparent;border:none;
+						word-wrap: break-word;">
+						<p:panel header="File Name: #{FileBean.data.title}">
+							<p:outputLabel value="#{FileBean.data.body}" escape="false" />
+						</p:panel>
+					</p:scrollPanel>
+
+				</c:if>
+			</div>
+
+
 		</h:form>
 	</div>
+
+	<div></div>
+
 </h:body>
 </html>
