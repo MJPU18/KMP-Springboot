@@ -31,7 +31,7 @@ public class FileBean {
 		data = new HashMap<>();
 		text = new StringBuffer();
 		pat = "";
-		repetitions=0;
+		repetitions = 0;
 	}
 
 	public void upload() {
@@ -52,8 +52,8 @@ public class FileBean {
 				}
 				loadData(file.getFileName().replace(".txt", ""), text.toString());
 				addMessage(FacesMessage.SEVERITY_INFO, "Successful", file.getFileName() + " is uploaded.");
-				repetitions=0;
-				pat="";
+				repetitions = 0;
+				pat = "";
 			} catch (IOException e) {
 				addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error reading content.");
 			}
@@ -63,43 +63,45 @@ public class FileBean {
 	}
 
 	public void markWord() {
-		if(text.isEmpty()) {
+		if (text.isEmpty()) {
 			addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please upload a .txt file");
 			return;
-		}
-		else if(pat.isEmpty()) {
+		} else if (pat.isEmpty()) {
 			addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please enter a word.");
 			return;
 		}
 		try {
-			String url = "http://localhost:8081/stringmatchingkmp/obtainResults" + "?txt="
-					+ URLEncoder.encode(text.toString(), "UTF-8") + "&pat=" + URLEncoder.encode(pat, "UTF-8");
-			String info=HttpClientSynchronous.doGet(url);
-			if(info.equals("0")) {
+			String url = "http://localhost:8081/stringmatchingkmp/obtainResults";
+			String json = "{\"txt\": \"" + URLEncoder.encode(text.toString(), "UTF-8") + "\", \"pat\": \""
+					+ URLEncoder.encode(pat, "UTF-8") + "\"}";
+			String info = HttpClientSynchronous.doPost(url, json);
+			if (info.equals("0")) {
 				addMessage(FacesMessage.SEVERITY_INFO, "Info", "No matches found.");
-				repetitions=0;
+				repetitions = 0;
 				loadData(file.getFileName().replace(".txt", ""), text.toString());
-			}
-			else {
-				String data[]=info.split("\n");
-				ArrayList<int[]> indexes=new ArrayList<>();
-				for(String row:data[0].split(";")) {
-					String column[]=row.split(",");
-					indexes.add(new int[] {Integer.parseInt(column[0]),Integer.parseInt(column[1])});
+			} else {
+				String data[] = info.split("\n");
+				ArrayList<int[]> indexes = new ArrayList<>();
+				for (String row : data[0].split(";")) {
+					String column[] = row.split(",");
+					indexes.add(new int[] { Integer.parseInt(column[0]), Integer.parseInt(column[1]) });
 				}
-				StringBuffer aux=new StringBuffer(text.toString());
-				int leni=51,lenf=7;
-				int carry=0;
-				for(int arr[]:indexes) {
-					aux.insert(arr[0]+carry, "<span style='background-color: yellow !important;'>");
-					carry+=leni;
-					aux.insert(arr[1]+carry, "</span>");
-					carry+=lenf;
+				StringBuffer aux = new StringBuffer(text.toString());
+				int leni = 51, lenf = 7;
+				int carry = 0;
+				int ant[] = null;
+				for (int arr[] : indexes) {
+					if(ant!=null && arr[0]<ant[1])arr[0]=ant[1];
+					aux.insert(arr[0] + carry, "<span style='background-color: yellow !important;'>");
+					carry += leni;
+					aux.insert(arr[1] + carry, "</span>");
+					carry += lenf;
+					ant=arr;
 				}
-				repetitions=Integer.parseInt(data[1]);
+				repetitions = Integer.parseInt(data[1]);
 				loadData(file.getFileName().replace(".txt", ""), aux.toString());
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error when searching for matches.");
 		}
 	}

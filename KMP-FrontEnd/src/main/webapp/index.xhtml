@@ -33,9 +33,9 @@
 
 					<p:fileUpload  value="#{FileBean.file}" mode="simple"
 						allowTypes="/(\.|\/)(txt)$/" skinSimple="true" auto="true"
+						accept=".txt" 
 						process="@this" update="messages formtxt"
 						listener="#{FileBean.handleFileUpload}" />
-
 				</div>
 
 
@@ -74,7 +74,7 @@
 					<p:scrollPanel mode="native"
 						style="margin-top: 25px;margin-left:50px;width:490px;
 						height:340px;background-color: transparent;border:none;
-						word-wrap: break-word;">
+						word-wrap: break-word important!; white-space: pre-wrap;">
 						<p:panel header="File Name: #{FileBean.data.title}">
 							<p:outputLabel value="#{FileBean.data.body}" escape="false" />
 						</p:panel>

@@ -6,20 +6,16 @@ public class StringMatching {
 
 	private String txt;
 	private String pat;
-	private ArrayList<int[]> indexes;
 
-	public StringMatching() {
-		indexes=new ArrayList<>();
-	}
+	public StringMatching() {}
 
-	public StringMatching(String txt, String pat, ArrayList<int[]> indexes) {
+	public StringMatching(String txt, String pat) {
 		this.txt = txt;
 		this.pat = pat;
-		this.indexes = indexes;
 	}
 
-	public void KMPSearch() {
-		indexes.clear();
+	public ArrayList<int[]> KMPSearch() {
+		ArrayList<int[]> indexes=new ArrayList<>();
 		int M = pat.length();
 		int N = txt.length();
 		int lps[] = new int[M];
@@ -42,6 +38,7 @@ public class StringMatching {
 				}
 			}
 		}
+		return indexes;
 	}
 
 	public void computeLPSArray(String pat, int M, int lps[]) {
@@ -79,14 +76,6 @@ public class StringMatching {
 
 	public void setPat(String pat) {
 		this.pat = pat;
-	}
-
-	public ArrayList<int[]> getIndexes() {
-		return indexes;
-	}
-
-	public void setIndexes(ArrayList<int[]> indexes) {
-		this.indexes = indexes;
 	}
 
 }
