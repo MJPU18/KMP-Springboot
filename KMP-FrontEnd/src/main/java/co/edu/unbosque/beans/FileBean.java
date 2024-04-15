@@ -48,11 +48,12 @@ public class FileBean {
 				String line = "";
 				text = new StringBuffer();
 				while ((line = br.readLine()) != null) {
-					text.append(line).append("<br>");
+					text.append(line).append("\n");
 				}
 				loadData(file.getFileName().replace(".txt", ""), text.toString());
 				addMessage(FacesMessage.SEVERITY_INFO, "Successful", file.getFileName() + " is uploaded.");
 				repetitions=0;
+				pat="";
 			} catch (IOException e) {
 				addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error reading content.");
 			}
@@ -64,6 +65,10 @@ public class FileBean {
 	public void markWord() {
 		if(text.isEmpty()) {
 			addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please upload a .txt file");
+			return;
+		}
+		else if(pat.isEmpty()) {
+			addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Please enter a word.");
 			return;
 		}
 		try {
@@ -101,7 +106,7 @@ public class FileBean {
 
 	public void loadData(String title, String info) {
 		data.put("title", title);
-		data.put("body", info);
+		data.put("body", info.replace("\n", "<br>"));
 	}
 
 	public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
