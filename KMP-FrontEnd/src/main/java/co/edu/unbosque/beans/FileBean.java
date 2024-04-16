@@ -26,12 +26,14 @@ public class FileBean {
 	private StringBuffer text;
 	private String pat;
 	private int repetitions;
+	private boolean caseSensitive;
 
 	public FileBean() {
 		data = new HashMap<>();
 		text = new StringBuffer();
 		pat = "";
 		repetitions = 0;
+		caseSensitive=true;
 	}
 
 	public void upload() {
@@ -71,9 +73,14 @@ public class FileBean {
 			return;
 		}
 		try {
+			String txt=text.toString(),pattern=pat;
+			if(!caseSensitive) {
+				txt=txt.toLowerCase();
+				pattern=pat.toLowerCase();
+			}
 			String url = "http://localhost:8081/stringmatchingkmp/obtainResults";
-			String json = "{\"txt\": \"" + URLEncoder.encode(text.toString(), "UTF-8") + "\", \"pat\": \""
-					+ URLEncoder.encode(pat, "UTF-8") + "\"}";
+			String json = "{\"txt\": \"" + URLEncoder.encode(txt, "UTF-8") + "\", \"pat\": \""
+					+ URLEncoder.encode(pattern, "UTF-8") + "\"}";
 			String info = HttpClientSynchronous.doPost(url, json);
 			if (info.equals("0")) {
 				addMessage(FacesMessage.SEVERITY_INFO, "Info", "No matches found.");
@@ -153,6 +160,14 @@ public class FileBean {
 
 	public void setRepetitions(int repetitions) {
 		this.repetitions = repetitions;
+	}
+
+	public boolean isCaseSensitive() {
+		return caseSensitive;
+	}
+
+	public void setCaseSensitive(boolean caseSensitive) {
+		this.caseSensitive = caseSensitive;
 	}
 
 }

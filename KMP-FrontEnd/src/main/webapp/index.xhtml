@@ -20,7 +20,7 @@
 			<div class="shape" id="shapes"></div>
 			<div class="shape"></div>
 		</div>
-		
+
 		<h:form class="forml" id="formtxt">
 
 			<div class="inputg">
@@ -29,12 +29,11 @@
 
 				<div class="containerfile">
 
-					<p:outputLabel  class="label" value="Choose File"></p:outputLabel>
+					<p:outputLabel class="label" value="Choose File"></p:outputLabel>
 
-					<p:fileUpload  value="#{FileBean.file}" mode="simple"
+					<p:fileUpload value="#{FileBean.file}" mode="simple"
 						allowTypes="/(\.|\/)(txt)$/" skinSimple="true" auto="true"
-						accept=".txt" 
-						process="@this" update="messages formtxt"
+						accept=".txt" process="@this" update="messages formtxt"
 						listener="#{FileBean.handleFileUpload}" />
 				</div>
 
@@ -46,8 +45,22 @@
 							<p:commandButton value="Search" class="search"
 								action="#{FileBean.markWord}" update="messages formtxt quantity" />
 
-							<p:inputText style="background-color: rgba(255, 255, 255, 0.07);color: white;font-family: 'Consolas', sans-serif;" 
-							placeholder="Word" value="#{FileBean.pat}" />
+							<p:inputText
+								style="background-color: rgba(255, 255, 255, 0.07);color: white;font-family: 'Consolas', sans-serif;"
+								placeholder="Word" value="#{FileBean.pat}" />
+						</div>
+					</div>
+
+
+					<div class="containerfile">
+						<p:outputLabel class="label" value="Case Sensitivity"></p:outputLabel>
+					</div>
+
+
+					<div class="col-12 md:col-4 containerfile">
+						<div class="ui-inputgroup">
+							<p:toggleSwitch value="#{FileBean.caseSensitive}"
+								onIcon="pi pi-check" offIcon="pi pi-times" />
 						</div>
 					</div>
 
@@ -59,10 +72,12 @@
 					<div class="col-12 md:col-4 containerfile">
 						<div class="ui-inputgroup">
 							<p:inputText id="quantity" placeholder="Quantity" readonly="true"
-								value="#{FileBean.repetitions}" style="background-color: rgba(255, 255, 255, 0.07);
-								color: white;font-family: 'Consolas', sans-serif;"/>
+								value="#{FileBean.repetitions}"
+								style="background-color: rgba(255, 255, 255, 0.07);
+								color: white;font-family: 'Consolas', sans-serif;" />
 						</div>
 					</div>
+
 				</div>
 			</div>
 
